@@ -14,6 +14,7 @@
     <link href="{{ REMOTE_STATIC_URL }}v3/assets/jquery-ui-1.11.0.custom/jquery-ui.min.css" rel="stylesheet">
     <!-- 平台cs	 -->
 	<link href="{{ REMOTE_STATIC_URL }}v3/bk/css/bk.css" rel="stylesheet">
+
     <style>
     	/*如果你需要给你的应用固定高度和宽度，请在这里修改*/
 		body {min-width:1202px;}
@@ -76,13 +77,19 @@
 	var debug_mode = JSON.parse("{{ DEBUG }}");	// 是否调试模式
 </script>
 <!--统计js  勿删-->
+    <script src="{{ REMOTE_STATIC_URL }}jquery/jquery.json-2.3.min.js"></script>
 <script src="{{ REMOTE_STATIC_URL }}analysis.js?v={{ STATIC_VERSION }}"></script>
 <script src="{{ STATIC_URL }}account/login.js?v={{ STATIC_VERSION }}"></script>
 <script src="{{ STATIC_URL }}js/csrftoken.js?v={{ STATIC_VERSION }}"></script>
 <script src="{{STATIC_URL}}js/settings.js?v=${ STATIC_VERSION }"></script>
 
+
+
+
+
 {% endblock %}
 {% block extra_block %}
+
 <!--
     这里放置子页面中附加内容，一般为js，注意子模版中的js如果使用到以上js库，必须放置在这里
  -->

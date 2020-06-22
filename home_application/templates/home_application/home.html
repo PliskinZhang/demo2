@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
 {% block head %}
+
 	<title>蓝鲸开发框架</title>
 	{{ block.super }}
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" />
+
 {% endblock %}
 
 {% block navigation %}
@@ -11,8 +16,162 @@
 {% endblock %}
 
 {% block content %}
-	<div>
-		<h3>蓝鲸开发框架<small>助力你的自动化</small></h3>
-	</div>
+	<!--
+如果没有引用以下文件，请去掉此注释
+<link rel="stylesheet" href="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" />
+<link rel="stylesheet" href="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" />
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+-->
+
+<div id="treeview_demo8" class="treeview_demo">
+    <div id="listenersDemoTree" data-role="treeview" class="k-widget k-treeview" tabindex="0" aria-activedescendant="listenersDemoTree_tv_active">
+        <ul class="k-group k-treeview-lines" role="tree">
+            <li role="treeitem" class="k-item k-first" data-uid="d355c574-baf5-40d6-9e5e-158ac5141d74" aria-selected="false " data-expanded="true" aria-expanded="true">
+                <div class="k-top"><span class="k-icon k-minus" role="presentation"></span><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">根节点一</span></div>
+                <ul class="k-group" role="group" style="display: block;">
+                    <li role="treeitem" class="k-item" data-uid="6b79903a-0965-48e7-afe6-ae2d7313e1e2" aria-selected="false ">
+                        <div class="k-top"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">子节点 01</span></div>
+                    </li>
+                    <li role="treeitem" class="k-item" data-uid="ef0db793-7d54-442f-bede-9456a113ba19" aria-selected="true" id="listenersDemoTree_tv_active">
+                        <div class="k-mid"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in k-state-selected k-state-focused">子节点 02</span></div>
+                    </li>
+                    <li role="treeitem" class="k-item k-last" data-uid="b3dd7375-420d-4ab5-bd23-7fc6302b61d8" aria-selected="false ">
+                        <div class="k-bot"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">子节点 03</span></div>
+                    </li>
+                </ul>
+            </li>
+            <li role="treeitem" class="k-item" data-uid="603820b4-8332-4c8b-bc62-9b1dabb0c7ad" aria-selected="false ">
+                <div class="k-mid"><span class="k-icon k-plus" role="presentation"></span><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">根节点二</span></div>
+                <ul class="k-group" role="group" style="display:none">
+                    <li role="treeitem" class="k-item" data-uid="6e6bcb4b-e98a-41f5-ba5a-59edb15240b1" aria-selected="false ">
+                        <div class="k-top"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">子节点 04</span></div>
+                    </li>
+                    <li role="treeitem" class="k-item" data-uid="4fc5b674-b959-41c3-9bdf-6296a73279f0" aria-selected="false ">
+                        <div class="k-mid"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">子节点 05</span></div>
+                    </li>
+                    <li role="treeitem" class="k-item k-last" data-uid="958972b1-4ac0-4878-893d-55816d5b48ae" aria-selected="false ">
+                        <div class="k-bot"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">子节点 06</span></div>
+                    </li>
+                </ul>
+            </li>
+            <li role="treeitem" class="k-item k-last" data-uid="5a0a05e0-215f-4c63-b35c-efdac911ac93" aria-selected="false ">
+                <div class="k-bot"><span class="k-checkbox" role="presentation"><input type="checkbox"></span><span class="k-in">根节点三</span></div>
+            </li>
+        </ul>
+    </div>
+    <div class="selectedWrapper">
+        <h5>已选中节点</h5>
+        <div id="selectedContainer"></div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block extra_block %}
+<script src="https://magicbox.bk.tencent.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+<script type="text/javascript">
+    // 事件样例
+    var treeviewListenerDemo=function(option){
+    	this.selected=[];
+    	this.init(option);
+    };
+    treeviewListenerDemo.prototype={
+    	 constructor:treeviewListenerDemo,
+    	 init:function(option){
+    		 var opt={
+    		    treeContainer:'#listenersDemoTree',
+    		    selectedContainer:'#selectedContainer',
+    	        dataSource:[{
+    	        	text: "根节点一",
+                    expanded: true,
+                    items: [
+                        { text: "子节点 01" },
+                        { text: "子节点 02" },
+                        { text: "子节点 03" }
+                    ]
+    	         },
+                 {
+           	        text: "根节点二",
+           	        items: [
+                         { text: "子节点 04" },
+                         { text: "子节点 05" },
+                         { text: "子节点 06" }
+                        ]
+                  },
+                  {
+                	  text: "根节点三"
+                 }]
+    		 };
+    		 this.option=$.extend(opt,option);
+    		 this.treeContainer=$(this.option.treeContainer);
+    		 this.selectedContainer=$(this.option.selectedContainer);
+    		 this.initTree();
+    		 this.initEvent();
+    	 },
+    	 initTree:function(){
+    		 this.treeContainer.kendoTreeView({
+    		    checkboxes: {
+    		        checkChildren : true
+    		    },
+    		    dataSource: this.option.dataSource,
+    		    check: this._onCheck.bind(this)
+    		 });
+    		 this.treeView=this.treeContainer.data("kendoTreeView");
+    	 },
+    	 _onCheck:function(e){
+    		 var me=this;
+    		 me.selected=[];
+    	     function getChecked(nodes) {
+                 for (var i = 0; i < nodes.length; i++) {
+                     if (nodes[i].hasChildren) {
+                         getChecked(nodes[i].children.view());
+                     }else if (nodes[i].checked&&nodes[i].parentNode()) {
+                         me.selected.push(nodes[i]);
+                     }
+                 }
+             }
+             getChecked(me.treeView.dataSource.view());
+    		 me.upSelected();
+    	 },
+    	 upSelected:function(){
+    		 var me=this,
+    		     selected=me.selected,
+    		     node,
+    		     nodeText=[],
+    		     html='';
+    		 if(selected.length){
+    			 html="<ul>";
+    			 for(var i=0;i<selected.length;i++){
+    				 node=selected[i];
+    				 nodeText.push('<li><input type="checkbox" checked>'+node.text+'</li>');
+    			 }
+    			 html+=nodeText.join('');
+    			 html+='</ul>';
+    		 }
+    		 this.selectedContainer.html(html);
+    	 },
+    	 _remove:function(e){
+    		 var me=this,
+    		     item=e.target.parentNode,
+    		     items=item.parentNode.childNodes;
+    		 for(var i=0;i<items.length;i++){
+    			 if(item==items[i]){
+    				me.selected[i].checked=false;
+    				me.treeView.findByText(me.selected[i].text).find('input').attr('checked',false);
+    				me._onCheck();
+    				break;
+    			 }
+    		 }
+    	 },
+    	 initEvent:function(){
+    		 var me=this;
+    		 me.selectedContainer.on('click.listenerDemo','input',function(e){
+    			 me._remove(e);
+    		 });
+    	 }
+    };
+    var listenerDemo=new treeviewListenerDemo();
+</script>
+
 {% endblock %}
 

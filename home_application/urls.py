@@ -20,4 +20,6 @@ from home_application import views
 urlpatterns = (
     url(r'^$', views.home),
     url(r'^contact/$', views.contact),
+    url(r'^listBusiness/$',views.list_business),
+    url(r'^doFastJob/$',views.doFastJob),
 )
